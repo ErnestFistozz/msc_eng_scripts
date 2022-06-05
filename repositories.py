@@ -23,6 +23,10 @@ def apache_repos(org = 'apache') -> list[str]:
     Coveralls: https://coveralls.io/github/apache?page=2
 '''
 
+def coveralls_repos(org ='apache') -> list[str]:
+    return
+
+
 def text_file(repositories : list[str]) -> None:
     with open('codecov_repositories.txt', 'w') as file:
         for repo in repositories:
