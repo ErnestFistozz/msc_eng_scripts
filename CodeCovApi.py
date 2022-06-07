@@ -18,10 +18,10 @@ class CodeCovApi(CoverageApi):
         if len(commits) == 0 or commits == None: return []
         for commit in commits:
             if not isinstance(commit['totals'], type(None)):
-                    coverage, commit_date = commit['totals']['c'], commit['timestamp']
+                    coverage, commit_hash, commit_date = commit['totals']['c'], commit['commitid'], commit['timestamp']
                     if float(coverage) > 0:
                         cov_time_pair = tuple()
-                        cov_time_pair  = (commit_date, coverage)
+                        cov_time_pair  = (commit_date, commit_hash, coverage)
                         coverage_date_pair.append(cov_time_pair)
         return coverage_date_pair
 

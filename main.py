@@ -1,19 +1,20 @@
 import csv
 from CoverallsApi import CoverallsApi
-#from CodeCovApi import CodeCovApi
+from CodeCovApi import CodeCovApi
 
 
 def save_into_file(repo,  coverage_date_date_pair :list[tuple]) -> None:
     csv_file_name = repo + ".csv"
     with open(csv_file_name, "w") as outfile:
         csv_writer = csv.writer(outfile)
-        csv_writer.writerow(["timestamp", "Code Coverage"])
+        csv_writer.writerow(["timestamp", "Commit Hash", "Code Coverage"])
         for row in coverage_date_date_pair:
                 csv_writer.writerow(row)
 
 if __name__ == '__main__':
-    '''
-    apache_repos = ['dubbo']
+   
+    with open('codecov_repositories.txt','r') as file:
+       apache_repos = file.read().splitlines()
     for repo in apache_repos:
         empty_response = False
         response_counter = 1
@@ -24,9 +25,10 @@ if __name__ == '__main__':
             if len(current_response) == 0:
                 empty_response = True
             else:
-                total_cov_date += project.coverage_date_metric_pair()
+                total_cov_date += project.coverage_date_pair()
             response_counter += 1
-    save_into_file(repo, total_cov_date)
+        print(f"repo-name: {repo}")
+        save_into_file(repo, total_cov_date)
     '''
     coveralls_repos = ['coveralls-demo-ruby']
     for repo in coveralls_repos:
@@ -39,8 +41,7 @@ if __name__ == '__main__':
             overall_results += cov_instance.coverage_date_pair()
             page_counter += 1
         save_into_file(repo, overall_results)
-
-
+     '''
 
 
 

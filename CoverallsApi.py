@@ -15,10 +15,10 @@ class CoverallsApi(CoverageApi):
         builds = response['builds']
         if not builds or builds == None: return []
         for build in builds:
-            coverage, commit_date = build['covered_percent'], build['created_at']
+            coverage, commit_hash, commit_date = build['covered_percent'], build['commit_sha'], build['created_at']
             if float(coverage) > 0:
                 cov_date_pair = tuple()
-                cov_date_pair = (commit_date, coverage)
+                cov_date_pair = (commit_date, commit_hash ,coverage)
                 coverage_date_results.append(cov_date_pair)
         return coverage_date_results
 
