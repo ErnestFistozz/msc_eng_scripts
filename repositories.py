@@ -19,7 +19,7 @@ def apache_repos(org = 'apache') -> list[str]:
         page +=1
     return names_of_repos
 '''
-    Code Cov: https://codecov.io/api/gh/apache?page=1
+    Code Cov:  https://codecov.io/api/gh/apache?page=1
     Coveralls: https://coveralls.io/github/apache?page=2
 '''
 
