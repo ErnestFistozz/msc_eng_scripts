@@ -13,7 +13,7 @@ def apache_repos(org = 'apache') -> list[str]:
             empty = True
             continue
         for repo in repos:
-            if repo['language'] == 'java':
+            if repo['language'] == 'java' or isinstance(repo['language'], type(None)):
                 if not isinstance(repo['name'], type(None)):
                     names_of_repos.append(repo['name'])
         page +=1
