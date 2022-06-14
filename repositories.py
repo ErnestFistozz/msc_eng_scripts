@@ -1,5 +1,6 @@
 
 import requests, csv
+from scrapper import *
 
 def apache_repos(org = 'apache') -> list[str]:
     empty = False
@@ -23,17 +24,18 @@ def apache_repos(org = 'apache') -> list[str]:
     Coveralls: https://coveralls.io/github/apache?page=2
 '''
 
-def coveralls_repos(org ='apache') -> list[str]:
-    return
-
-
-def text_file(repositories : list[str]) -> None:
-    with open('codecov_repositories.txt', 'w') as file:
+def text_file(cov_tool: str, repositories : list[str]) -> None:
+    with open(f'{cov_tool}.txt', 'w') as file:
         for repo in repositories:
             file.write(repo + "\n")
 
 def main():
-    text_file(apache_repos())
+    code_cov = 'code_cov_repos'
+    coveralls_cov = 'coveralls_repos'
+    coveralls_org = 'apache'
+    total_number_of_pages = 4
+    #text_file(code_cov, apache_repos())
+    text_file(coveralls_cov, coveralls_projects(total_number_of_pages, coveralls_org))
 
 
 if __name__ == '__main__':
