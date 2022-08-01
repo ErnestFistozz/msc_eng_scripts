@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  Coveralls:
+    name: 'Coveralls Repositories'
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Create CSVs'
+      run: |
+        echo "Coveralls-Api data"
+
+  CodeCov:
+    name: 'CodeCov Repositories'
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Create CSVs'
+      run: |
+        echo "CodeCov Api data"
