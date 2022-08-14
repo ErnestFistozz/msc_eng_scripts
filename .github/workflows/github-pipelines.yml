@@ -20,6 +20,7 @@ jobs:
 
     - name: 'clone-repos'
       run: |
+        pwd
         mkdir -p $HOME/temp/repos
         cd temp/repos
         projects=$(ls ../../java-repos-csv/)
