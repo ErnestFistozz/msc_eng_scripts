@@ -20,9 +20,9 @@ jobs:
 
     - name: 'clone-repos'
       run: |
-        mkdir -p temp/repos
+        mkdir -p $HOME/temp/repos
         cd temp/repos
-        projects=$(ls java-repos-csv/)
+        projects=$(ls ../../java-repos-csv/)
         for repo in "${projects[@]}"
         do
           git clone git@github.com:apache/$repo.git
@@ -30,10 +30,11 @@ jobs:
 
     - name: 'Calculate Lines of Code'
       run: |
-        projects=$(ls java-repos-csv/)
+        pwd
+        projects=$(ls ../../java-repos-csv/)
         for repo in "${projects[@]}"
         do
-          cd temp/repos/$repo
+          cd $HOME/temp/repos/$repo
           csv_path=../../../java-repos-csv
           ../../../lines_of_code.sh $csv_path $repo
         done
