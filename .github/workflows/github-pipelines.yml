@@ -6,6 +6,38 @@ on:
       - '*'
 
 jobs:
+  Repositories:
+    name: 'Clone Repos'
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Install SCC'
+      run: |
+        go install github.com/boyter/scc@latest
+
+    - name: 'Install cloc'
+      run: |
+        sudo apt install cloc 
+
+    - name: 'clone-repos'
+      run: |
+        mkdir -p temp/repos
+        cd temp/repos
+        projects=$(ls java-repos-csv/)
+        for repo in "${projects[@]}"
+        do
+          git clone git@github.com:apache/$repo.git
+        done
+
+    - name: 'Calculate Lines of Code'
+      run: |
+        projects=$(ls java-repos-csv/)
+        for repo in "${projects[@]}"
+        do
+          cd temp/repos/$repo
+          csv_path=../../../java-repos-csv
+          ../../../lines_of_code.sh $csv_path $repo
+        done
+
   Coveralls:
     name: 'Coveralls Repositories'
     runs-on: ubuntu-latest
