@@ -20,10 +20,10 @@ jobs:
 
     - name: 'clone-repos'
       run: |
-        pwd
-        mkdir -p $HOME/temp/repos
-        cd temp/repos
-        projects=$(ls ../../java-repos-csv/)
+        default_dir=/home/runner/work/msc_eng_scripts/msc_eng_scripts
+        mkdir -p /home/runner/work/temp/repos
+        cd /home/runner/work/temp/repos
+        projects=$(ls $default_dir/java-repos-csv/)
         for repo in "${projects[@]}"
         do
           git clone git@github.com:apache/$repo.git
@@ -31,13 +31,14 @@ jobs:
 
     - name: 'Calculate Lines of Code'
       run: |
-        pwd
-        projects=$(ls ../../java-repos-csv/)
+        default_dir=/home/runner/work/msc_eng_scripts/msc_eng_scripts
+        echo "current directory: $PWD"
+        projects=$(ls $default_dir/java-repos-csv/)
         for repo in "${projects[@]}"
         do
-          cd $HOME/temp/repos/$repo
-          csv_path=../../../java-repos-csv
-          ../../../lines_of_code.sh $csv_path $repo
+          cd $default/temp/repos/$repo
+          csv_path=$default_dir/java-repos-csv
+          $default_dir/lines_of_code.sh $csv_path $repo
         done
 
   Coveralls:
